@@ -42,7 +42,7 @@ class ofApp : public ofBaseApp{
         int i;
         int j;
         for (i=0; i<4; i++) {
-            for (j=0; j<200; j++) {
+            for (j=0; j<50; j++) {
                 ofCircle(circleArray[i][j], circleArray[j][i], circleRadius);
 
             }

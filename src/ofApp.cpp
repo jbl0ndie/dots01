@@ -24,14 +24,14 @@ void ofApp::setup(){
     int i;
     int j;
     
-    for (i=0; i<200; i++) {
+    for (i=0; i<50; i++) {
         
-        for (j=0; j<200; j++)
+        for (j=0; j<50; j++)
             circleArray[i][j] = ofRandom(-2000, 2000);
         
     }
-    for (i = 0; i <200; i++) {
-        for (j=0; j<200; j++) {
+    for (i = 0; i <50; i++) {
+        for (j=0; j<50; j++) {
             cout << circleArray[i][j] << '\n';
         }
     }
@@ -46,14 +46,14 @@ void ofApp::update(){
     float alpha = ofMap(ofGetMouseX(), 0, ofGetWidth(), 0, 255);
     fbo.begin();
     ofSetColor(255, 255, 255, alpha);
-    ofRect(0, 0, 400, 400);
+//    ofRect(0, 0, 400, 400);
     
     ofPushMatrix();
         ofSetColor(255, 255, 255, 255);
         ofTranslate(ofGetWindowWidth()/1.8, ofGetWindowHeight()/2.2);
         ofRotate( rotationAngle, 0, 0, 1 ); // Set cemtre of rotation to mid-point
         ofPushMatrix();
-            ofTranslate(-ofGetWindowWidth()/2+ofGetFrameNum()/5, -ofGetWindowHeight()/2); // Reset draw position to 0,0
+            ofTranslate(-ofGetWindowWidth()/2+ofGetFrameNum()/2, -ofGetWindowHeight()/2); // Reset draw position to 0,0
             drawCircle(1);
         ofPopMatrix();
     ofPopMatrix();
@@ -74,16 +74,16 @@ void ofApp::draw(){
     // What we need is bottom layer to be black with white dots
     // Top layer to be black, rotating, with transparent dots
     
-    ofSetColor(255, 127, 0);  // Set orange colour
-    ofRect(200, 200, 400, 400); // Draw a fixed square, offset
+//    ofSetColor(255, 127, 0);  // Set orange colour
+//    ofRect(200, 200, 400, 400); // Draw a fixed square, offset
     
-    ofSetColor(255, 255, 255, 255);
+    ofSetColor(255, 127, 0, 255);
     fbo.draw(0, 0);  // draw the FBO to the screen
     
-    ofPushMatrix();
-    ofSetColor(0,0,0,255);
-    drawCircle(15);
-    ofPopMatrix();
+//    ofPushMatrix();
+//    ofSetColor(0,0,0,255);
+//    drawCircle(15);
+//    ofPopMatrix();
     
     // Draw a duplicate set of dots but then rotate them about the centrepoint of the screen
 //    ofSetColor(255, 127, 0);  // Debug with orange dots on top
@@ -99,7 +99,7 @@ void ofApp::draw(){
 //    ofPopMatrix();
     
     
-    
+    ofSetColor(255);
     //Print fps at top right of window
     ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", ofGetWindowWidth()-100, 15);
 };
