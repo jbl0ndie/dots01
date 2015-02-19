@@ -8,19 +8,18 @@ void ofApp::setup(){
     ofBackground(0);
 //    ofSetColor(255);
     
-    fbo.allocate(400, 400, GL_RGBA); // set up FBO with alpha, 8 bits rgb
+    fbo.allocate(ofGetWindowWidth(), ofGetWindowHeight(), GL_RGBA); // set up FBO with alpha, 8 bits rgb
     
     fbo.begin();
-    ofClear(255, 255, 255, 255);  // it's good practice to clear the FBO after allocating it
+    ofClear(255, 255, 255, 0);  // it's good practice to clear the FBO after allocating it
     fbo.end();
     
     // experimenting with alpha blending and blending modes
     ofEnableAlphaBlending();
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     
-    
     rotationAngle = 0;
-    rotationSpeed = 0.1;
+    rotationSpeed = 0.8; // 0.1 is good
     
     int i;
     int j;
@@ -50,13 +49,13 @@ void ofApp::update(){
     ofRect(0, 0, 400, 400);
     
     ofPushMatrix();
-    ofSetColor(255, 255, 255, 255);
-    ofTranslate(ofGetWindowWidth()/1.8, ofGetWindowHeight()/2.2);
-    ofRotate( rotationAngle, 0, 0, 1 ); // Set cemtre of rotation to mid-point
-    ofPushMatrix();
-    ofTranslate(-ofGetWindowWidth()/2, -ofGetWindowHeight()/2); // Reset draw position to 0,0
-    drawCircle(15);
-    ofPopMatrix();
+        ofSetColor(255, 255, 255, 255);
+        ofTranslate(ofGetWindowWidth()/1.8, ofGetWindowHeight()/2.2);
+        ofRotate( rotationAngle, 0, 0, 1 ); // Set cemtre of rotation to mid-point
+        ofPushMatrix();
+            ofTranslate(-ofGetWindowWidth()/2+ofGetFrameNum()/5, -ofGetWindowHeight()/2); // Reset draw position to 0,0
+            drawCircle(1);
+        ofPopMatrix();
     ofPopMatrix();
     
     fbo.end();
