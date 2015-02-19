@@ -28,6 +28,8 @@ class ofApp : public ofBaseApp{
     
     // fill a 2D array with random x and y coordinates
    
+    ofFbo fbo; // instantiate an FBO object
+    
     
     // pass the 2D array as arguments into a function that draws circles at the
     // array coordinates, with the radius as a separate argument to the function

@@ -7,6 +7,18 @@ void ofApp::setup(){
     
     ofBackground(255);
 //    ofSetColor(255);
+    
+    fbo.allocate(400, 400, GL_RGBA); // set up FBO with alpha, 8 bits rgb
+    
+    fbo.begin();
+    ofClear(255, 255, 255, 255);  // it's good practice to clear the FBO after allocating it
+    fbo.end();
+    
+    // experimenting with alpha blending and blending modes
+    ofEnableAlphaBlending();
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    
+    
     rotationAngle = 0;
     rotationSpeed = 0.1;
     
@@ -31,6 +43,12 @@ void ofApp::setup(){
 void ofApp::update(){
 
     rotationAngle += rotationSpeed;
+    
+    float alpha = ofMap(ofGetMouseX(), 0, ofGetWidth(), 0, 255);
+    fbo.begin();
+    ofSetColor(255, 255, 255, alpha);
+    ofRect(0, 0, 400, 400);
+    fbo.end();
 }
 
 //--------------------------------------------------------------
@@ -46,6 +64,11 @@ void ofApp::draw(){
     // What we need is bottom layer to be black with white dots
     // Top layer to be black, rotating, with transparent dots
     
+    ofSetColor(255, 127, 0);  // Set orange colour
+    ofRect(200, 200, 400, 400); // Draw a fixed square, offset
+    
+    ofSetColor(255, 255, 255, 255);
+    fbo.draw(0, 0);
     
     ofPushMatrix();
     ofSetColor(0,0,0,255);
