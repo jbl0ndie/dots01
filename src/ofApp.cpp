@@ -5,7 +5,7 @@ void ofApp::setup(){
     
     ofSetFrameRate(30);
     
-    ofBackground(255);
+    ofBackground(0);
 //    ofSetColor(255);
     
     fbo.allocate(400, 400, GL_RGBA); // set up FBO with alpha, 8 bits rgb
@@ -48,6 +48,17 @@ void ofApp::update(){
     fbo.begin();
     ofSetColor(255, 255, 255, alpha);
     ofRect(0, 0, 400, 400);
+    
+    ofPushMatrix();
+    ofSetColor(255, 255, 255, 255);
+    ofTranslate(ofGetWindowWidth()/1.8, ofGetWindowHeight()/2.2);
+    ofRotate( rotationAngle, 0, 0, 1 ); // Set cemtre of rotation to mid-point
+    ofPushMatrix();
+    ofTranslate(-ofGetWindowWidth()/2, -ofGetWindowHeight()/2); // Reset draw position to 0,0
+    drawCircle(15);
+    ofPopMatrix();
+    ofPopMatrix();
+    
     fbo.end();
 }
 
@@ -68,7 +79,7 @@ void ofApp::draw(){
     ofRect(200, 200, 400, 400); // Draw a fixed square, offset
     
     ofSetColor(255, 255, 255, 255);
-    fbo.draw(0, 0);
+    fbo.draw(0, 0);  // draw the FBO to the screen
     
     ofPushMatrix();
     ofSetColor(0,0,0,255);
@@ -77,16 +88,16 @@ void ofApp::draw(){
     
     // Draw a duplicate set of dots but then rotate them about the centrepoint of the screen
 //    ofSetColor(255, 127, 0);  // Debug with orange dots on top
-    ofPushMatrix();
-        ofSetBackgroundColor(0);
-    ofSetColor(255, 255, 255, 255);
-        ofTranslate(ofGetWindowWidth()/1.8, ofGetWindowHeight()/2.2);
-        ofRotate( rotationAngle, 0, 0, 1 ); // Set cemtre of rotation to mid-point
-        ofPushMatrix();
-            ofTranslate(-ofGetWindowWidth()/2, -ofGetWindowHeight()/2); // Reset draw position to 0,0
-            drawCircle(15);
-        ofPopMatrix();
-    ofPopMatrix();
+//    ofPushMatrix();
+//        ofSetBackgroundColor(0);
+//    ofSetColor(255, 255, 255, 255);
+//        ofTranslate(ofGetWindowWidth()/1.8, ofGetWindowHeight()/2.2);
+//        ofRotate( rotationAngle, 0, 0, 1 ); // Set cemtre of rotation to mid-point
+//        ofPushMatrix();
+//            ofTranslate(-ofGetWindowWidth()/2, -ofGetWindowHeight()/2); // Reset draw position to 0,0
+//            drawCircle(15);
+//        ofPopMatrix();
+//    ofPopMatrix();
     
     
     
